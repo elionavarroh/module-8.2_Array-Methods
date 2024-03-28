@@ -72,6 +72,7 @@ const obtenPacientesAsignadosAPediatria = (pacientes) => {
   };
   return pacientesPediatra;
 };
+console.log(obtenPacientesAsignadosAPediatria(pacientes));
 
 //Apartado 1.2 -> Extraer la lista de pacientes asignados a Pediatría y que tengan una edad menor de 10 años.
 const obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios = (pacientes) => {
@@ -84,12 +85,13 @@ const obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios = (pacientes) => {
   };
   return pacientesPediatra;
 };
+console.log(obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios(pacientes));
 
 //Apartado 2 -> Activar el protocolo de urgencia si cualquier de los pacientes tiene un ritmo cardíaco superior a 100 pulsaciones por minuto y una temperatura corporal superior a 39 grados.
 const activarProtocoloUrgencia = (pacientes) => {
   let activarProctolo = false;
   for (let i = 0; i < pacientes.length; i++) {
-    const paciente = paciente[i];
+    const paciente = pacientes[i];
     if (paciente.frecuenciaCardiaca > 100 && paciente.temperatura > 39) {
       activarProctolo = true;
       break;
@@ -97,18 +99,24 @@ const activarProtocoloUrgencia = (pacientes) => {
   };
   return activarProctolo;
 };
+console.log(activarProtocoloUrgencia(pacientes));
 
 //Apartado 3 -> El pediatra no puede atender hoy a los pacientes, así que hay que reasignar los pacientes asignados a la especialidad de pediatría a la de medico de familia.
 const reasignaPacientesAMedicoFamilia = (pacientes) => {
-  const pacientesModificados = pacientes;
-  for (let i = 0; i < pacientesModificados.length; i++) {
-    const paciente = pacientesModificados[i];
+  let pacientesModificados = [];
+  for (let i = 0; i < pacientes.length; i++) {
+    const paciente = pacientes[i];
     if (paciente.especialidad === "Pediatra") {
-      paciente.especialidad = "Medico de familia";
+      const nuevoPaciente = { ...paciente, especialidad: "Medico de familia" }
+      pacientesModificados.push(nuevoPaciente);
+    } else { 
+      const nuevoPaciente = { ...paciente }
+      pacientesModificados.push(nuevoPaciente);
     };
   };
   return pacientesModificados;
 };
+console.log(reasignaPacientesAMedicoFamilia(pacientes));
 
 //Apartado 4 -> Saber si podemos mandar al Pediatra a casa (si no tiene pacientes asignados), comprobar si en la lista hay algún paciente asignado a pediatría.
 const HayPacientesDePediatria = (pacientes) => {
@@ -122,6 +130,7 @@ const HayPacientesDePediatria = (pacientes) => {
   };
   return hayPacientesPediatra;
 };
+console.log(HayPacientesDePediatria(pacientes));
 
 //Apartado 5 -> Calcular el número total de pacientes que están asignados a la especialidad de Medico de familia, y lo que están asignados a Pediatría y a cardiología.
 const cuentaPacientesPorEspecialidad = (pacientes) => {
@@ -130,14 +139,18 @@ const cuentaPacientesPorEspecialidad = (pacientes) => {
     numCardiologo = 0;
   for (let i = 0; i < pacientes.length; i++) {
     const paciente = pacientes[i];
-    if (paciente.especialidad === "Medico de familia") {
-      numMedicoDeFamilia++; // Esto sería que numMedicoDeFamilia = numMedicoDeFamilia + 1;
-    } else if (paciente.especialidad === "Pediatra") {
-      numPediatra++;  // Esto sería que numPediatra = numPediatra + 1;
-    } else if (paciente.especialidad === "Cardiólogo") {
-      numCardiologo++;  // Esto sería que numCardiologo = numCardiologo + 1;
-    } else {
-      console.log("Especialidad no reconocida");
+    switch (paciente.especialidad) {
+      case "Medico de familia":
+        numMedicoDeFamilia++;
+        break;
+      case "Pediatra":
+        numPediatra++;
+        break;
+      case "Cardiólogo":
+        numCardiologo++;
+        break;
+      default:
+        console.log("Especialidad no reconocida");
     };
   };
   return {
@@ -146,3 +159,4 @@ const cuentaPacientesPorEspecialidad = (pacientes) => {
     cardiologia: numCardiologo,
   };
 };
+console.log(cuentaPacientesPorEspecialidad(pacientes));
