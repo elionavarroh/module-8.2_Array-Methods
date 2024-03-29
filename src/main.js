@@ -93,43 +93,16 @@ console.log(reasignaPacientesAMedicoFamilia(pacientes));
 
 //Apartado 4 -> Saber si podemos mandar al Pediatra a casa (si no tiene pacientes asignados), comprobar si en la lista hay algún paciente asignado a pediatría.
 const HayPacientesDePediatria = (pacientes) => {
-  let hayPacientesPediatra = false;
-  for (let i = 0; i < pacientes.length; i++) {
-    const paciente = pacientes[i];
-    if (paciente.especialidad === "Pediatra") {
-      hayPacientesPediatra = true;
-      break;
-    };
-  };
-  return hayPacientesPediatra;
+  return pacientes.some((paciente) => paciente.especialidad === "Pediatra");
 };
 console.log(HayPacientesDePediatria(pacientes));
 
 //Apartado 5 -> Calcular el número total de pacientes que están asignados a la especialidad de Medico de familia, y lo que están asignados a Pediatría y a cardiología.
 const cuentaPacientesPorEspecialidad = (pacientes) => {
-  let numMedicoDeFamilia = 0,
-    numPediatra = 0,
-    numCardiologo = 0;
-  for (let i = 0; i < pacientes.length; i++) {
-    const paciente = pacientes[i];
-    switch (paciente.especialidad) {
-      case "Medico de familia":
-        numMedicoDeFamilia++;
-        break;
-      case "Pediatra":
-        numPediatra++;
-        break;
-      case "Cardiólogo":
-        numCardiologo++;
-        break;
-      default:
-        console.log("Especialidad no reconocida");
-    };
-  };
   return {
-    medicoDeFamilia: numMedicoDeFamilia,
-    pediatria: numPediatra,
-    cardiologia: numCardiologo,
+    medicofamilia: pacientes.filter((paciente) => paciente.especialidad === "Medico de familia").length,
+    pediatria: pacientes.filter((paciente) => paciente.especialidad === "Pediatra").length,
+    cardiologia: pacientes.filter((paciente) => paciente.especialidad === "Cardiólogo").length,
   };
 };
 console.log(cuentaPacientesPorEspecialidad(pacientes));
