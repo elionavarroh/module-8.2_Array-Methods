@@ -17,16 +17,16 @@ h1 {
 
 p {
   font-size: 25px;
-  font-family: "Montserrat", sans-serif; 
+  font-family: "Montserrat", sans-serif;
   font-style: normal;
   font-weight: 400;
 }
 
 h2 {
   font-size: large;
-  font-family: "Montserrat", sans-serif; 
+  font-family: "Montserrat", sans-serif;
   font-style: normal;
   border-radius: 95px;
   background-size: 20px;
   color: black;
-};
+}

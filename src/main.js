@@ -67,7 +67,6 @@ const obtenPacientesAsignadosAPediatria = (pacientes) => {
 };
 console.log(obtenPacientesAsignadosAPediatria(pacientes));
 
-
 //Apartado 1.2 -> Extraer la lista de pacientes asignados a Pediatría y que tengan una edad menor de 10 años.
 const obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios = (pacientes) => {
   return pacientes.filter((paciente) => paciente.especialidad === "Pediatra" && paciente.edad < 10)
@@ -82,12 +81,10 @@ console.log(activarProtocoloUrgencia(pacientes));
 
 //Apartado 3 -> El pediatra no puede atender hoy a los pacientes, así que hay que reasignar los pacientes asignados a la especialidad de pediatría a la de medico de familia.
 const reasignaPacientesAMedicoFamilia = (pacientes) => {
-  return pacientes.map((paciente) => {
-    if (paciente.especialidad === "Pediatra")
-    {paciente.especialidad = "Medico de familia";
-    };
-    return paciente;
-  });
+  return pacientes.map(paciente => ({
+    ...paciente,
+    especialidad: (paciente.especialidad === "Pediatra") ? "Medico Familia" : paciente.especialidad
+  }));
 };
 console.log(reasignaPacientesAMedicoFamilia(pacientes));
 
