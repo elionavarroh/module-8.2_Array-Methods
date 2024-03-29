@@ -70,38 +70,24 @@ console.log(obtenPacientesAsignadosAPediatria(pacientes));
 
 //Apartado 1.2 -> Extraer la lista de pacientes asignados a Pediatría y que tengan una edad menor de 10 años.
 const obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios = (pacientes) => {
-  return pacientes.filter((paciente) => paciente.especialidad === "Pediatra" & paciente.edad < 10)
+  return pacientes.filter((paciente) => paciente.especialidad === "Pediatra" && paciente.edad < 10)
 };
 console.log(obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios(pacientes));
 
 //Apartado 2 -> Activar el protocolo de urgencia si cualquier de los pacientes tiene un ritmo cardíaco superior a 100 pulsaciones por minuto y una temperatura corporal superior a 39 grados.
 const activarProtocoloUrgencia = (pacientes) => {
-  let activarProctolo = false;
-  for (let i = 0; i < pacientes.length; i++) {
-    const paciente = pacientes[i];
-    if (paciente.frecuenciaCardiaca > 100 && paciente.temperatura > 39) {
-      activarProctolo = true;
-      break;
-    };
-  };
-  return activarProctolo;
+  return pacientes.some((paciente) => paciente.frecuenciaCardiaca < 100 && paciente.temperatura < 39)
 };
 console.log(activarProtocoloUrgencia(pacientes));
 
 //Apartado 3 -> El pediatra no puede atender hoy a los pacientes, así que hay que reasignar los pacientes asignados a la especialidad de pediatría a la de medico de familia.
 const reasignaPacientesAMedicoFamilia = (pacientes) => {
-  let pacientesModificados = [];
-  for (let i = 0; i < pacientes.length; i++) {
-    const paciente = pacientes[i];
-    if (paciente.especialidad === "Pediatra") {
-      const nuevoPaciente = { ...paciente, especialidad: "Medico de familia" }
-      pacientesModificados.push(nuevoPaciente);
-    } else { 
-      const nuevoPaciente = { ...paciente }
-      pacientesModificados.push(nuevoPaciente);
+  return pacientes.map((paciente) => {
+    if (paciente.especialidad === "Pediatra")
+    {paciente.especialidad = "Medico de familia";
     };
-  };
-  return pacientesModificados;
+    return paciente;
+  });
 };
 console.log(reasignaPacientesAMedicoFamilia(pacientes));
 
