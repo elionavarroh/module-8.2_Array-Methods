@@ -63,16 +63,10 @@ const pacientes = [
 
 //Apartado 1 -> Extraer la lista de paciente que están asignados a la especialidad de Pediatría.
 const obtenPacientesAsignadosAPediatria = (pacientes) => {
-  const pacientesPediatra = [];
-  for (let i = 0; i < pacientes.length; i++) {
-    const paciente = pacientes[i];
-    if (paciente.especialidad === "Pediatra") {
-      pacientesPediatra.push(paciente);
-    };
-  };
-  return pacientesPediatra;
+  return pacientes.filter((paciente) => paciente.especialidad === "Pediatra")
 };
 console.log(obtenPacientesAsignadosAPediatria(pacientes));
+
 
 //Apartado 1.2 -> Extraer la lista de pacientes asignados a Pediatría y que tengan una edad menor de 10 años.
 const obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios = (pacientes) => {
