@@ -83,7 +83,7 @@ console.log(activarProtocoloUrgencia(pacientes));
 const reasignaPacientesAMedicoFamilia = (pacientes) => {
   return pacientes.map(paciente => ({
     ...paciente,
-    especialidad: (paciente.especialidad === "Pediatra") ? "Medico Familia" : paciente.especialidad
+    especialidad: paciente.especialidad === "Pediatra" ? "Medico Familia" : paciente.especialidad
   }));
 };
 console.log(reasignaPacientesAMedicoFamilia(pacientes));
